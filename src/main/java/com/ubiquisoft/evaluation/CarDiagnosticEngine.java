@@ -39,7 +39,37 @@ public class CarDiagnosticEngine {
 		 * console output is as least as informative as the provided methods.
 		 */
 
+		//first validate 3 data fields are present
+		if(ConditionType == null || Part == null || PartType == Null){
+			System.out.println("Missing field(s)");
+			if (ConditionType == null) System.out.println(" Condition Type");
+			if (Part == null) System.out.println(" Part");
+			if (PartType == null) System.out.println(" Part Type");
+			return;
+		}
 
+		//validate no parts are missing
+		Map<String, Integer> missingParts = car.getMissingPartsMap();
+		if (missingParts.size > 0){
+			System.out.println("missing part(s) is: ");
+			for (Map.Entry<String, Integer> entry : missingParts.entrySet()){
+				missingParts(entry.getKey(), entry.getValue());
+			}
+			return;
+		}
+
+		//validate each part is in working condition
+		List<String> damagedParts = getDamagedParts()
+		if(damagedParts.size() > 0){
+			System.out.println("Damaged parts: "):
+			for (String part : damagedParts){
+				damagedParts(part);
+			}
+			return;
+		}
+
+		//if validation is successful print success
+		System.out.println("Diagnostics complete. No issues found with this car.")
 	}
 
 	private void printMissingPart(PartType partType, Integer count) {

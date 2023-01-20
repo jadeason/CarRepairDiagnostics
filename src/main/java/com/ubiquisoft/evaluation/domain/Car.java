@@ -31,7 +31,45 @@ public class Car {
 		 *      }
 		 */
 
-		return null;
+		//initialize map to store missing parts
+		Map<PartType, Integer> missingParts = new HashMap<>();
+
+		//Check inventory for part needed
+		// Checking for ENGINE
+		int engineCount = inventory.getPartCount(PartType.ENGINE);
+		if (engineCount < 1) { //
+			missingParts.put(PartType.ENGINE, 1 - engineCount); //adding ENGINE to missing parts map
+		}
+
+		//check ELECTRICAL
+		int electricalCount = inventory.getPartCount(PartType.ELECTRICAL);
+		if (electricalCount < 1) { // If less than 1 electrical part is found in the inventory
+			missingParts.put(PartType.ELECTRICAL, 1 - electricalCount); //adding  ELECTRICAL to missing parts map
+
+		}
+		// Check for FUEL_FILTER
+		int fuelFilterCount = inventory.getPartCount(PartType.FUEL_FILTER);
+		if (fuelFilterCount < 1) { // If less than 1 fuel filter is found in the inventory
+			missingParts.put(PartType.FUEL_FILTER, 1 - fuelFilterCount); //adding FUEL_FILTER to missing parts map
+		}
+
+		// Check for OIL_FILTER
+		int oilFilterCount = inventory.getPartCount(PartType.OIL_FILTER);
+		if (oilFilterCount < 1) { // If less than 1 oil filter is found in the inventory
+			missingParts.put(PartType.OIL_FILTER, 1 - oilFilterCount); //adding OIL_FILTER to missing parts map
+		}
+
+		// Check for TIRE
+		int tireCount = inventory.getPartCount(PartType.TIRE);
+		if (tireCount < 4) { // If less than 4 tires are found in the inventory
+			missingParts.put(PartType.TIRE, 4 - tireCount); //adding TIRE to missing parts map
+		}
+
+		// Return the map of missing parts, if any
+		if (missingParts.size() == 0)
+			return null; // Return null if no missing parts are found
+		else
+			return missingParts; // Return the map of missing parts
 	}
 
 	@Override
